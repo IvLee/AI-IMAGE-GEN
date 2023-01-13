@@ -53,12 +53,14 @@ const generateVideoScript = async (req, res) => {
         const completion = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: generatePrompt(req.body.name,req.body.background,req.body.courseTopic,req.body.reason,req.body.target),
-            max_tokens: 70,
+            max_tokens: 256,
             temperature: 0.6,
             top_p: 1,
             n: 1,
             stream: false,
             logprobs: null,
+            frequency_penalty: 0.5,
+            presence_penalty: 0.0,
           });
 
           const videoScript = completion.data.choices[0].text;
